@@ -3,27 +3,23 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:40:22
 # Last Modified by: jibalucan
-# Last Modified time: 2019-10-08 20:17:41
+# Last Modified time: 2019-10-08 23:43:09
 # ---------------------------------------------
 # ---------------------------------------------*/
 const Board = require('./src/board');
 const Robot = require('./src/robot');
-const Commands = require('./src/commands');
 
 const cfgDefaults = require('./defaults');
 
-
 class RobotRunner {
-  constructor(cmdLines, cfg = cfgDefaults) {
-    this.cmdLines = cmdLines;
-    this.cfg = cfg;
+  constructor(commands, config = cfgDefaults) {
+    this.commands = commands;
+    this.config = config;
   }
 
   initialize() {
-    this.commands = Commands(this.cmdLines);
-
-    this.board = new Board(this.cfg);
-    this.robot = new Robot(this.cfg);
+    this.board = new Board(this.config);
+    this.robot = new Robot();
 
     // Link robot to board via board object
     const boardObject = this.board.createBoardObject();
@@ -31,9 +27,11 @@ class RobotRunner {
   }
 
   run() {
-    this.commands.forEach((command) => {
+    this.commands.forEach((line) => {
       try {
-        command.run(this.robot);
+        const stripped = line.trim();
+        const [command, parameters] = stripped.split(' ');
+        this.robot.execute(command, parameters);
       } catch (error) {
         console.log('ERROR', error);
         if (error !== 'ERR_BOARD_OUT_OF_BOUNDS') {
