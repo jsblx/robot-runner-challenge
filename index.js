@@ -3,7 +3,7 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:40:22
 # Last Modified by: jibalucan
-# Last Modified time: 2019-10-08 23:43:09
+# Last Modified time: 2019-10-09 08:21:17
 # ---------------------------------------------
 # ---------------------------------------------*/
 const Board = require('./src/board');
@@ -22,7 +22,7 @@ class RobotRunner {
     this.robot = new Robot();
 
     // Link robot to board via board object
-    const boardObject = this.board.createBoardObject();
+    const boardObject = this.board.createBoardPiece();
     this.robot.setBoardObject(boardObject);
   }
 
