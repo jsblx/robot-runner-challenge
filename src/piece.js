@@ -3,12 +3,13 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-09 08:03:39
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-09 21:09:37
+# Last Modified time: 2019-10-09 23:18:28
 # ---------------------------------------------
 # ---------------------------------------------*/
 
 class BoardPiece {
-  constructor(setCoordinateFn) {
+  constructor(pieceIndex, setCoordinateFn) {
+    this.id = pieceIndex;
     this.setCoordinateFn = setCoordinateFn;
   }
 

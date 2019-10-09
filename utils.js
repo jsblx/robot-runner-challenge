@@ -2,8 +2,8 @@
 # ---------------------------------------------
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 19:13:36
-# Last Modified by: jibalucan
-# Last Modified time: 2019-10-08 20:21:19
+# Last Modified by: balucan.js
+# Last Modified time: 2019-10-09 21:43:56
 # ---------------------------------------------
 # ---------------------------------------------*/
 const fs = require('fs');
@@ -16,7 +16,7 @@ function getFilenameFromArgs() {
 }
 
 async function getCommandLinesFromFile(fileName) {
-  const contents = await fs.readFileSync(fileName);
+  const contents = await fs.readFileSync(fileName).toString('ascii');
   const cmdLines = contents.split('\n');
   return cmdLines;
 }
