@@ -2,12 +2,10 @@
 # ---------------------------------------------
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:59:23
-# Last Modified by: jibalucan
-# Last Modified time: 2019-10-09 00:32:32
+# Last Modified by: balucan.js
+# Last Modified time: 2019-10-10 00:09:15
 # ---------------------------------------------
 # ---------------------------------------------*/
-
-
 const DIRECTION_COUNT = 4;
 const validDirections = ['north', 'east', 'south', 'west'];
 const validCommands = [
@@ -21,10 +19,11 @@ const validCommands = [
 
 function isValidCommand(command, params = '') {
   let valid = false;
-  const match = validCommands.filter((cmd) => cmd.name === command);
+  const match = validCommands.find((cmd) => cmd.name === command);
   if (match) {
     const { paramCount } = match;
     if (paramCount && params && params.split(',').length === paramCount) valid = true;
+    else if (paramCount === 0) valid = true;
   }
 
   return valid;
@@ -32,17 +31,21 @@ function isValidCommand(command, params = '') {
 
 class Robot {
   constructor() {
-    this.moveHistory = [];
-    this.robotPlaced = false;
+    this.isPlaced = false;
+    this.direction = null;
   }
 
-  setBoardObject(boardObject) {
-    this.boardObject = boardObject;
+  setBoardPiece(boardPiece) {
+    this.boardPiece = boardPiece;
   }
 
-  execute(command, parameters) {
+  execute(command, parameters = null) {
     const cmd = command.toLowerCase();
     if (isValidCommand(cmd, parameters)) this[cmd](parameters);
+  }
+
+  getDirection() {
+    return this.direction;
   }
 
   place(parameters) {
@@ -50,12 +53,9 @@ class Robot {
     const newDirection = facing.toLowerCase();
 
     if (validDirections.indexOf(newDirection) >= 0) {
-      this.boardObject.setCoordinates(x, y);
+      this.boardPiece.setCoordinates(x, y);
       this.direction = newDirection;
-
-      const moveObject = { command: 'place', parameters };
-      this.moveHistory.push(moveObject);
-      this.robotPlaced = true;
+      this.isPlaced = true;
     } else {
       throw Error('ERR_ROBOT_INVALID_DIRECTION');
     }
@@ -63,8 +63,8 @@ class Robot {
 
   move() {
     const { direction } = this;
-    if (this.robotPlaced) {
-      this.boardObject.move(direction);
+    if (this.isPlaced) {
+      this.boardPiece.move(direction);
     } else {
       throw Error('ERR_ROBOT_NOT_PLACED');
     }
@@ -72,7 +72,7 @@ class Robot {
 
   left() {
     const { direction } = this;
-    if (this.robotPlaced) {
+    if (this.isPlaced) {
       const dirIndex = validDirections.indexOf(direction);
 
       const adjustedDirIndex = dirIndex + DIRECTION_COUNT - 1;
@@ -87,7 +87,7 @@ class Robot {
 
   right() {
     const { direction } = this;
-    if (this.robotPlaced) {
+    if (this.isPlaced) {
       const dirIndex = validDirections.indexOf(direction);
 
       const adjustedDirIndex = dirIndex + DIRECTION_COUNT + 1;
@@ -101,9 +101,9 @@ class Robot {
   }
 
   report() {
-    const { x, y } = this.boardObject.getCoordinates();
-    const { direction } = this;
-    if (this.robotPlaced) {
+    if (this.isPlaced) {
+      const { x, y } = this.boardPiece.getCoordinates();
+      const { direction } = this;
       console.log(`${x},${y},${direction}`);
     } else {
       throw Error('ERR_ROBOT_NOT_PLACED');

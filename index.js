@@ -2,8 +2,8 @@
 # ---------------------------------------------
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:40:22
-# Last Modified by: jibalucan
-# Last Modified time: 2019-10-09 08:21:17
+# Last Modified by: balucan.js
+# Last Modified time: 2019-10-09 23:47:43
 # ---------------------------------------------
 # ---------------------------------------------*/
 const Board = require('./src/board');
@@ -22,8 +22,8 @@ class RobotRunner {
     this.robot = new Robot();
 
     // Link robot to board via board object
-    const boardObject = this.board.createBoardPiece();
-    this.robot.setBoardObject(boardObject);
+    const boardPiece = this.board.createBoardPiece();
+    this.robot.setBoardPiece(boardPiece);
   }
 
   run() {
