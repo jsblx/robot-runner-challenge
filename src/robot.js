@@ -3,9 +3,11 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:59:23
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-10 00:09:15
+# Last Modified time: 2019-10-11 15:15:36
 # ---------------------------------------------
 # ---------------------------------------------*/
+const io = require('./io');
+
 const DIRECTION_COUNT = 4;
 const validDirections = ['north', 'east', 'south', 'west'];
 const validCommands = [
@@ -22,7 +24,7 @@ function isValidCommand(command, params = '') {
   const match = validCommands.find((cmd) => cmd.name === command);
   if (match) {
     const { paramCount } = match;
-    if (paramCount && params && params.split(',').length === paramCount) valid = true;
+    if (paramCount && params && params.length === paramCount) valid = true;
     else if (paramCount === 0) valid = true;
   }
 
@@ -41,6 +43,7 @@ class Robot {
 
   execute(command, parameters = null) {
     const cmd = command.toLowerCase();
+    io.debug(`robot execute ${command}`, parameters);
     if (isValidCommand(cmd, parameters)) this[cmd](parameters);
   }
 
@@ -51,9 +54,11 @@ class Robot {
   place(parameters) {
     const [x, y, facing] = parameters;
     const newDirection = facing.toLowerCase();
-
+    const setCol = parseInt(x, 10);
+    const setRow = parseInt(y, 10);
+    io.debug(`executing place [${setRow}][${setCol}][${facing}]`);
     if (validDirections.indexOf(newDirection) >= 0) {
-      this.boardPiece.setCoordinates(x, y);
+      this.boardPiece.setCoordinates(setCol, setRow);
       this.direction = newDirection;
       this.isPlaced = true;
     } else {
@@ -64,6 +69,7 @@ class Robot {
   move() {
     const { direction } = this;
     if (this.isPlaced) {
+      io.debug(`executing move [${direction}]`);
       this.boardPiece.move(direction);
     } else {
       throw Error('ERR_ROBOT_NOT_PLACED');
@@ -73,6 +79,7 @@ class Robot {
   left() {
     const { direction } = this;
     if (this.isPlaced) {
+      io.debug(`executing left from ${direction}`);
       const dirIndex = validDirections.indexOf(direction);
 
       const adjustedDirIndex = dirIndex + DIRECTION_COUNT - 1;
@@ -88,6 +95,7 @@ class Robot {
   right() {
     const { direction } = this;
     if (this.isPlaced) {
+      io.debug(`executing right from ${direction}`);
       const dirIndex = validDirections.indexOf(direction);
 
       const adjustedDirIndex = dirIndex + DIRECTION_COUNT + 1;
@@ -102,9 +110,9 @@ class Robot {
 
   report() {
     if (this.isPlaced) {
-      const { x, y } = this.boardPiece.getCoordinates();
+      const { row, col } = this.boardPiece.getCoordinates();
       const { direction } = this;
-      console.log(`${x},${y},${direction}`);
+      io.output(`${col},${row},${direction.toUpperCase()}`);
     } else {
       throw Error('ERR_ROBOT_NOT_PLACED');
     }

@@ -3,10 +3,11 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:59:15
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-09 23:18:08
+# Last Modified time: 2019-10-11 15:19:50
 # ---------------------------------------------
 # ---------------------------------------------*/
 const BoardPiece = require('./piece');
+const io = require('./io');
 
 function isOutOfBounds(coordinate, maxGridCoordinate) {
   return coordinate < 0 || coordinate >= maxGridCoordinate;
@@ -21,6 +22,7 @@ function hasCollision(grid, row, col, objectId) {
 class Board {
   constructor(config) {
     const { rowSize, columnSize } = config;
+    io.debug('BOARD', rowSize, columnSize);
     this.rowSize = rowSize;
     this.columnSize = columnSize;
     this.pieces = [];
@@ -39,17 +41,18 @@ class Board {
     return this.grid;
   }
 
-  createBoardPiece(row = null, col = null) {
+  createBoardPiece(row, col) {
     const pieceIndex = this.pieceCount;
     this.pieceCount += 1;
     const boardPiece = new BoardPiece(pieceIndex, (piece, newRow, newCol) => {
       this.setPieceCoordinates(piece, newRow, newCol);
     });
-    if (typeof (row) !== 'undefined' && typeof (col) !== 'undefined') boardPiece.setCoordinates(row, col);
+    if (typeof (row) !== 'undefined' && typeof (col) !== 'undefined') boardPiece.setCoordinates(col, row);
     return boardPiece;
   }
 
   setPieceCoordinates(piece, newRow, newCol) {
+    io.debug('ROW', newRow, 'COL', newCol, 'GRID', this.grid);
     if (isOutOfBounds(newRow, this.rowSize) || isOutOfBounds(newCol, this.columnSize)) {
       throw Error('ERR_PIECE_OUT_OF_BOUNDS');
     }
@@ -65,20 +68,12 @@ class Board {
 
   clearCell(row, col) {
     if (typeof (row) !== 'undefined' && typeof (col) !== 'undefined') this.grid[row][col] = {};
+    else io.debug(`clear [${row}][${col}]`);
   }
 
   setCell(row, col, obj = {}) {
     if (typeof (row) !== 'undefined' && typeof (col) !== 'undefined') this.grid[row][col] = obj;
-  }
-
-  printField() {
-    this.grid.forEach((row) => {
-      row.forEach((col) => {
-        const object = col || {};
-        const { id = 'null' } = object;
-        console.log(`[${id}]`);
-      });
-    });
+    else io.debug(`set [${row}][${col}]`);
   }
 }
 

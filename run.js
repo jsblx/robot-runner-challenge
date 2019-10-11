@@ -1,15 +1,15 @@
 /* # ---------------------------------------------
 # ---------------------------------------------
 # Author: Joseph Ian Balucan
-# Date:   2019-10-08 18:55:42
-# Last Modified by: jibalucan
-# Last Modified time: 2019-10-08 20:21:52
+# Date:   2019-10-10 08:02:25
+# Last Modified by: balucan.js
+# Last Modified time: 2019-10-10 08:03:10
 # ---------------------------------------------
 # ---------------------------------------------*/
-const RobotRunner = require('../index');
-const { getFilenameFromArgs, getCommandLinesFromFile } = require('../utils');
+const RobotRunner = require('./index');
+const { getFilenameFromArgs, getCommandLinesFromFile } = require('./utils');
 
-async function runTest() {
+async function run() {
   const fileName = getFilenameFromArgs();
   const loadCmdLines = await getCommandLinesFromFile(fileName);
   const robotRunner = new RobotRunner(loadCmdLines);
@@ -17,4 +17,4 @@ async function runTest() {
   robotRunner.run();
 }
 
-runTest();
+run();
