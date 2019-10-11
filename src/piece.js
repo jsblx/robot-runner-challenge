@@ -3,7 +3,7 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-09 08:03:39
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-11 15:15:16
+# Last Modified time: 2019-10-11 16:02:55
 # ---------------------------------------------
 # ---------------------------------------------*/
 const io = require('./io');
@@ -48,24 +48,24 @@ class BoardPiece {
     this.setCoordinates(col - 1, row);
   }
 
-  move(direction) {
-    switch (direction) {
-      case 'north':
-        this.moveNorth();
-        break;
-      case 'east':
-        this.moveEast();
-        break;
-      case 'west':
-        this.moveWest();
-        break;
-      case 'south':
-        this.moveSouth();
-        break;
-      default:
-        break;
-    }
-  }
+  // move(direction) {
+  //   switch (direction) {
+  //     case 'north':
+  //       this.moveNorth();
+  //       break;
+  //     case 'east':
+  //       this.moveEast();
+  //       break;
+  //     case 'west':
+  //       this.moveWest();
+  //       break;
+  //     case 'south':
+  //       this.moveSouth();
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 }
 
 

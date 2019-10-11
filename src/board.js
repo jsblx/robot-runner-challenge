@@ -3,7 +3,7 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:59:15
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-11 15:19:50
+# Last Modified time: 2019-10-11 16:15:48
 # ---------------------------------------------
 # ---------------------------------------------*/
 const BoardPiece = require('./piece');
@@ -41,13 +41,13 @@ class Board {
     return this.grid;
   }
 
-  createBoardPiece(row, col) {
+  createBoardPiece(row = null, col = null, PieceClass = BoardPiece) {
     const pieceIndex = this.pieceCount;
     this.pieceCount += 1;
-    const boardPiece = new BoardPiece(pieceIndex, (piece, newRow, newCol) => {
+    const boardPiece = new PieceClass(pieceIndex, (piece, newRow, newCol) => {
       this.setPieceCoordinates(piece, newRow, newCol);
     });
-    if (typeof (row) !== 'undefined' && typeof (col) !== 'undefined') boardPiece.setCoordinates(col, row);
+    if (row !== null && col !== null) boardPiece.setCoordinates(col, row);
     return boardPiece;
   }
 

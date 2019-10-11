@@ -3,9 +3,10 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:59:23
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-11 15:15:36
+# Last Modified time: 2019-10-11 16:11:31
 # ---------------------------------------------
 # ---------------------------------------------*/
+const BoardPiece = require('./piece');
 const io = require('./io');
 
 const DIRECTION_COUNT = 4;
@@ -31,14 +32,11 @@ function isValidCommand(command, params = '') {
   return valid;
 }
 
-class Robot {
-  constructor() {
+class Robot extends BoardPiece {
+  constructor(...args) {
+    super(...args);
     this.isPlaced = false;
     this.direction = null;
-  }
-
-  setBoardPiece(boardPiece) {
-    this.boardPiece = boardPiece;
   }
 
   execute(command, parameters = null) {
@@ -58,7 +56,7 @@ class Robot {
     const setRow = parseInt(y, 10);
     io.debug(`executing place [${setRow}][${setCol}][${facing}]`);
     if (validDirections.indexOf(newDirection) >= 0) {
-      this.boardPiece.setCoordinates(setCol, setRow);
+      this.setCoordinates(setCol, setRow);
       this.direction = newDirection;
       this.isPlaced = true;
     } else {
@@ -70,7 +68,22 @@ class Robot {
     const { direction } = this;
     if (this.isPlaced) {
       io.debug(`executing move [${direction}]`);
-      this.boardPiece.move(direction);
+      switch (direction) {
+        case 'north':
+          this.moveNorth();
+          break;
+        case 'east':
+          this.moveEast();
+          break;
+        case 'west':
+          this.moveWest();
+          break;
+        case 'south':
+          this.moveSouth();
+          break;
+        default:
+          break;
+      }
     } else {
       throw Error('ERR_ROBOT_NOT_PLACED');
     }
@@ -110,7 +123,7 @@ class Robot {
 
   report() {
     if (this.isPlaced) {
-      const { row, col } = this.boardPiece.getCoordinates();
+      const { row, col } = this.getCoordinates();
       const { direction } = this;
       io.output(`${col},${row},${direction.toUpperCase()}`);
     } else {

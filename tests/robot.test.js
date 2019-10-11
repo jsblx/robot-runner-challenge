@@ -3,7 +3,7 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-09 23:36:01
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-10 00:21:40
+# Last Modified time: 2019-10-11 16:06:40
 # ---------------------------------------------
 # ---------------------------------------------*/
 const Robot = require('../src/robot');
@@ -64,8 +64,6 @@ beforeEach(() => {
 
 it('creates a robot and performs a place command into (0, 0, north)', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'north']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -77,8 +75,6 @@ it('creates a robot and performs a place command into (0, 0, north)', () => {
 
 it('creates a robot and performs a place command into (0, 0, south)', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'south']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -90,8 +86,6 @@ it('creates a robot and performs a place command into (0, 0, south)', () => {
 
 it('creates a robot and performs a place command into (0, 0, east)', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'east']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -102,8 +96,6 @@ it('creates a robot and performs a place command into (0, 0, east)', () => {
 
 it('creates a robot and performs a place command into (0, 0, west)', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'west']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -115,8 +107,6 @@ it('creates a robot and performs a place command into (0, 0, west)', () => {
 
 it('creates a robot and performs a place command into (0, 0, north), and performs left()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'north']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -129,8 +119,6 @@ it('creates a robot and performs a place command into (0, 0, north), and perform
 
 it('creates a robot and performs a place command into (0, 0, north), and performs left() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'north']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -146,8 +134,6 @@ it('creates a robot and performs a place command into (0, 0, north), and perform
 
 it('creates a robot and performs a place command into (0, 0, north), and performs right()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'north']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -160,8 +146,6 @@ it('creates a robot and performs a place command into (0, 0, north), and perform
 
 it('creates a robot and performs a place command into (0, 0, north), and performs right() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'north']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -177,8 +161,6 @@ it('creates a robot and performs a place command into (0, 0, north), and perform
 
 it('creates a robot and performs a place command into (0, 0, east), and performs left()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'east']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -191,8 +173,6 @@ it('creates a robot and performs a place command into (0, 0, east), and performs
 
 it('creates a robot and performs a place command into (0, 0, east), and performs left() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'east']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -208,8 +188,6 @@ it('creates a robot and performs a place command into (0, 0, east), and performs
 
 it('creates a robot and performs a place command into (0, 0, east), and performs right()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'east']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -222,8 +200,6 @@ it('creates a robot and performs a place command into (0, 0, east), and performs
 
 it('creates a robot and performs a place command into (0, 0, east), and performs right() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'east']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -239,8 +215,6 @@ it('creates a robot and performs a place command into (0, 0, east), and performs
 
 it('creates a robot and performs a place command into (0, 0, south), and performs left()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'south']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -253,8 +227,6 @@ it('creates a robot and performs a place command into (0, 0, south), and perform
 
 it('creates a robot and performs a place command into (0, 0, south), and performs left() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'south']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -270,8 +242,6 @@ it('creates a robot and performs a place command into (0, 0, south), and perform
 
 it('creates a robot and performs a place command into (0, 0, south), and performs right()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'south']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -284,8 +254,6 @@ it('creates a robot and performs a place command into (0, 0, south), and perform
 
 it('creates a robot and performs a place command into (0, 0, south), and performs right() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'south']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -300,8 +268,6 @@ it('creates a robot and performs a place command into (0, 0, south), and perform
 
 it('creates a robot and performs a place command into (0, 0, west), and performs left()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'west']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -314,8 +280,6 @@ it('creates a robot and performs a place command into (0, 0, west), and performs
 
 it('creates a robot and performs a place command into (0, 0, west), and performs left() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'west']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -331,8 +295,6 @@ it('creates a robot and performs a place command into (0, 0, west), and performs
 
 it('creates a robot and performs a place command into (0, 0, west), and performs right()', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'west']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;
@@ -345,8 +307,6 @@ it('creates a robot and performs a place command into (0, 0, west), and performs
 
 it('creates a robot and performs a place command into (0, 0, west), and performs right() twice', () => {
   const robot = new Robot();
-  const piece = new BoardPiece();
-  robot.setBoardPiece(piece);
   robot.place([0, 0, 'west']);
   const mockPieceInstance = BoardPiece.mock.instances[0];
   const mockSetCoordinates = mockPieceInstance.setCoordinates;

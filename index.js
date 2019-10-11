@@ -3,7 +3,7 @@
 # Author: Joseph Ian Balucan
 # Date:   2019-10-08 18:40:22
 # Last Modified by: balucan.js
-# Last Modified time: 2019-10-10 09:10:39
+# Last Modified time: 2019-10-11 16:12:25
 # ---------------------------------------------
 # ---------------------------------------------*/
 const Board = require('./src/board');
@@ -20,11 +20,9 @@ class RobotRunner {
 
   initialize() {
     this.board = new Board(this.config);
-    this.robot = new Robot();
 
-    // Link robot to board via board object
-    const boardPiece = this.board.createBoardPiece();
-    this.robot.setBoardPiece(boardPiece);
+    // Create a board piece that is a robot
+    this.robot = this.board.createBoardPiece(null, null, Robot);
   }
 
   run() {
